@@ -17,5 +17,12 @@ pipeline {
                 sh 'python3 test.py'
             }
         }
+        stage('Static Code Analysis') {
+            steps {
+                sh 'pylint *.py || true'
+                sh 'pylint --exit-zero --reports=n --msg-template="{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}" *.py > pylint-report.txt'
+                sh 'cat pylint-report.txt'
+            }
+        }
     }
 }
