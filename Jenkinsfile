@@ -1,11 +1,17 @@
 pipeline {
     agent any
-
+    
     stages {
-        stage('Stage 1') {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url:'https://github.com/RaupeCHR/jenkins-python.git'
-                sh 'ls -l'
+                checkout([
+                    $class: 'GitSCM', 
+                    branches: [[name: '*/main']], 
+                    doGenerateSubmoduleConfigurations: false, 
+                    extensions: [], 
+                    submoduleCfg: [], 
+                    userRemoteConfigs: [[url: 'https://github.com/appjonathan/jenkins-python']]
+                ])
             }
         }
         stage('Stage 2') {
@@ -27,7 +33,7 @@ pipeline {
         }
         stage('Check Dockerfile') {
             steps {
-                 sh 'ls -l'
+                sh 'ls -l'
             }
         }
         stage('Build Docker Image') {
