@@ -24,5 +24,10 @@ pipeline {
                 sh 'cat pylint-report.txt'
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t my-python-app .'
+            }
+        }
     }
 }
