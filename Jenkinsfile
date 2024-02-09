@@ -5,6 +5,7 @@ pipeline {
         stage('Stage 1') {
             steps {
                 git branch: 'main', url:'https://github.com/RaupeCHR/jenkins-python.git'
+                sh 'ls -l'
             }
         }
         stage('Stage 2') {
